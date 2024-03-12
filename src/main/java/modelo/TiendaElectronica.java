@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TiendaElectronica {
     private String nombre;
     private String direccion;
