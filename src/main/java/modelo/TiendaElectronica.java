@@ -1,7 +1,7 @@
 package modelo;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TiendaElectronica {
     private String nombre;
@@ -56,28 +56,15 @@ public class TiendaElectronica {
         return null;
     }
 
-    public Producto buscarProductoCategoria() {
+    public List<Producto> buscarProductoCategoria(Categoria categoria) {
+        List<Producto> productosCategoria = new ArrayList<>();
         for (Producto producto : this.productos) {
-            Scanner sc =  new Scanner(System.in);
-            System.out.println("Seleccione que categoria de productos desea ver: \n1)Computadoras\n2)Teclados\n3)Auriculares\n4)Celulares\n5)Mouses");
-            int opcion = sc.nextInt();
-            if (producto.getTipo().equals(Categoria.COMPUTADORAS)&&opcion==1) {
-                return producto;
+            if (producto.getTipo().equals(categoria)) {
+                productosCategoria.add(producto);
             }
-            if (producto.getTipo().equals(Categoria.TECLADOS)&&opcion==2) {
-                    return producto;
-                }
-            if (producto.getTipo().equals(Categoria.AURICULARES)&&opcion==3) {
-                    return producto;
-                }
-            if (producto.getTipo().equals(Categoria.CELULARES)&&opcion==4) {
-                    return producto;
-                }
-            if (producto.getTipo().equals(Categoria.MOUSE)&&opcion==5) {
-                    return producto;
-            }
+
         }
-        return null;
+        return productosCategoria;
     }
     public boolean productoExiste(Producto producto) {
         for (Producto p : this.productos) {
@@ -87,18 +74,38 @@ public class TiendaElectronica {
         }
         return false;
     }
-    public boolean agregarProducto(Producto prodcuto) {
-        if (!productoExiste(prodcuto)) {
-            this.productos.add(prodcuto);
+    public boolean agregarProducto(Producto producto) {
+        if (!productoExiste(producto)) {
+            this.productos.add(producto);
             System.out.println("El produdcto ha sido agregado con exito");
             return true;
         } else {
-            System.out.println("El producto no ha podido ser agregado");
+            System.out.println("El producto ya se encuentra en la tienda");
             return false;
         }
     }
-    public void modifcarDescripcion(){
-
+    public void modifcarDescripcion(String descripcion, String nombre){
+        for(Producto producto : this.productos){
+            if(producto.getNombre().equals(nombre)){
+                producto.setDescripcion(descripcion);
+                break;
+            }
+        }
+    }
+    public void eliminarProducto(String nombre){
+        for(Producto producto : this.productos){
+            if(producto.getNombre().equals(nombre)){
+                productos.remove(producto);
+                break;
+            }
+        }
+    }
+    public void generarCompra(String nombre){
+        for(Producto producto : this.productos){
+            if(producto.getNombre().equals(nombre)){
+                producto.quitarStock();
+            }
+        }
     }
 }
 
