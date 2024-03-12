@@ -1,6 +1,7 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TiendaElectronica {
     private String nombre;
@@ -57,23 +58,47 @@ public class TiendaElectronica {
 
     public Producto buscarProductoCategoria() {
         for (Producto producto : this.productos) {
-            if (producto.getTipo().equals(Categoria.COMPUTADORAS)) {
+            Scanner sc =  new Scanner(System.in);
+            System.out.println("Seleccione que categoria de productos desea ver: \n1)Computadoras\n2)Teclados\n3)Auriculares\n4)Celulares\n5)Mouses");
+            int opcion = sc.nextInt();
+            if (producto.getTipo().equals(Categoria.COMPUTADORAS)&&opcion==1) {
                 return producto;
             }
-            if (producto.getTipo().equals(Categoria.TECLADOS)) {
+            if (producto.getTipo().equals(Categoria.TECLADOS)&&opcion==2) {
                     return producto;
                 }
-            if (producto.getTipo().equals(Categoria.AURICULARES)) {
+            if (producto.getTipo().equals(Categoria.AURICULARES)&&opcion==3) {
                     return producto;
                 }
-            if (producto.getTipo().equals(Categoria.CELULARES)) {
+            if (producto.getTipo().equals(Categoria.CELULARES)&&opcion==4) {
                     return producto;
                 }
-            if (producto.getTipo().equals(Categoria.MOUSE)) {
+            if (producto.getTipo().equals(Categoria.MOUSE)&&opcion==5) {
                     return producto;
             }
         }
         return null;
+    }
+    public boolean productoExiste(Producto producto) {
+        for (Producto p : this.productos) {
+            if (producto.getNombre().equals(p.getNombre())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean agregarProducto(Producto prodcuto) {
+        if (!productoExiste(prodcuto)) {
+            this.productos.add(prodcuto);
+            System.out.println("El produdcto ha sido agregado con exito");
+            return true;
+        } else {
+            System.out.println("El producto no ha podido ser agregado");
+            return false;
+        }
+    }
+    public void modifcarDescripcion(){
+
     }
 }
 
